@@ -1,0 +1,248 @@
+@import "tailwindcss";
+
+/* ============================================================
+   SERAFINA MIXOLOGY - servicio de coctelería para eventos
+
+   Reference: MOTH. Off-white page, one grotesque used everywhere,
+   headlines set heavy in uppercase, beige tiles carrying the
+   photography, black bands for the loud moments. No accent colour:
+   the drinks bring all of it.
+
+   Radius rule: 0 everywhere, no exception — every tile, card, image and
+   button is square-cornered.
+   Z-index: 0 base / 10 in-section / 40 nav / 50 overlay.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  --paper:  #FBFAF8;
+  --tile:   #EEEAE2;
+  --tile-2: #E4DFD5;
+  --line:   #DAD5CB;
+
+  /* Pale in BOTH editions: photography sits on it and the cut-out needs
+     a light ground to multiply against. */
+  --plate:  #EEEAE2;
+
+  --ink:       #141414;
+  --ink-muted: #5A5A58;
+  --ink-faint: #6E6E6A;
+
+  /* the loud bands: black on light, light on dark */
+  --invert:    #141414;
+  --on-invert: #FBFAF8;
+
+  --danger: #B0331C;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper:  #131312;
+  --tile:   #1E1D1B;
+  --tile-2: #262523;
+  --line:   #302F2C;
+
+  --plate:  #EEEAE2;
+
+  --ink:       #F2F0EC;
+  --ink-muted: #A0A09B;
+  --ink-faint: #8A8A84;
+
+  --invert:    #F2F0EC;
+  --on-invert: #131312;
+
+  --danger: #F0785C;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper:  #131312;
+    --tile:   #1E1D1B;
+    --tile-2: #262523;
+    --line:   #302F2C;
+    --plate:  #EEEAE2;
+    --ink:       #F2F0EC;
+    --ink-muted: #A0A09B;
+    --ink-faint: #8A8A84;
+    --invert:    #F2F0EC;
+    --on-invert: #131312;
+    --danger: #F0785C;
+  }
+}
+
+@theme inline {
+  --color-paper:  var(--paper);
+  --color-tile:   var(--tile);
+  --color-tile-2: var(--tile-2);
+  --color-plate:  var(--plate);
+  --color-line:   var(--line);
+
+  --color-ink:       var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-invert:    var(--invert);
+  --color-on-invert: var(--on-invert);
+  --color-danger:    var(--danger);
+
+  /* The brand face: a high-contrast didone, set in caps with open
+     tracking, exactly as the wordmark is drawn. */
+  --font-display: "Bodoni Moda Variable", "Bodoni Moda", Didot, Georgia, serif;
+  /* Everything functional stays in the grotesque: body, labels, buttons,
+     forms. A didone at 13px is unreadable. */
+  --font-sans: "Archivo Variable", "Archivo", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Headlines, in the brand face. Caps, open tracking, and a high
+     optical size so the hairlines stay as fine as the wordmark's. */
+  /* Bodoni is a didone: its optical-size axis controls stroke contrast.
+     At "opsz" 96 (the display cut) the hairlines go razor-thin and all
+     but vanish on screen. A low opsz plus a heavier weight keeps the
+     face and the brand, with strokes that actually hold. */
+  .display {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 14;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.015em;
+    line-height: 1.04;
+  }
+
+  /* The wordmark lockup: the name, and the descriptor under it set very
+     small and very wide, the way the logo is drawn. */
+  .brand {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 12;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+    line-height: 1;
+  }
+
+  .brand-sub {
+    font-family: var(--font-display);
+    font-variation-settings: "opsz" 10;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    line-height: 1;
+  }
+
+  /* Reversed out of black, thin strokes shrink optically. Anything set
+     light-on-dark takes a step more weight to hold the same colour as
+     the same type printed dark-on-light. */
+  .reversed {
+    font-weight: 700;
+    font-variation-settings: "opsz" 11;
+  }
+
+  /* In the night edition every headline is light on dark, so the whole
+     display face takes the same step of weight that `.reversed` gives
+     the elements that are dark-backed in both editions. Nothing set in
+     the display face sits on a pale tile, so this is safe to apply
+     across the board. */
+  :root[data-theme="dark"] .display,
+  :root[data-theme="dark"] .brand,
+  :root[data-theme="dark"] .brand-sub {
+    font-weight: 700;
+    font-variation-settings: "opsz" 11;
+  }
+
+  /* Section labels and metadata. */
+  .label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Cut-out. Stock photography has no alpha channel, so the pale ground
+     is removed optically: contrast pushes it to white and multiply drops
+     white into the tile. Only works over a pale surface, and only on
+     photographs already shot on a pale seamless ground. */
+  .cutout {
+    mix-blend-mode: multiply;
+    filter: brightness(1.07) contrast(1.24) saturate(1.18);
+    /* The ground never quite reaches pure white at the corners, so the
+       frame is faded out as well. Between the two the glass reads as
+       genuinely cut out rather than as a photo box. */
+    -webkit-mask-image: radial-gradient(
+      ellipse 62% 58% at 50% 52%, #000 62%, transparent 94%
+    );
+    mask-image: radial-gradient(
+      ellipse 62% 58% at 50% 52%, #000 62%, transparent 94%
+    );
+  }
+
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .display,
+  :root:not([data-theme="light"]) .brand,
+  :root:not([data-theme="light"]) .brand-sub {
+    font-weight: 700;
+    font-variation-settings: "opsz" 11;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+section[id] {
+  scroll-margin-top: 76px;
+}

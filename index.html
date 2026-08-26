@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Serafina Mixology · Barra de coctelería para eventos en Tijuana y Valle de Guadalupe</title>
+    <meta
+      name="description"
+      content="Barra de mixología para bodas, eventos corporativos, fiestas privadas y talleres en Tijuana y Valle de Guadalupe. Llevamos la barra, los bartenders y una carta de autor. Cotización en dos días."
+    />
+    <meta name="theme-color" content="#131312" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#FBFAF8" media="(prefers-color-scheme: light)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Serafina Mixology" />
+    <meta
+      property="og:description"
+      content="Barra de mixología para bodas, corporativos, fiestas privadas y talleres. Tijuana y Valle de Guadalupe."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1200&h=630&q=80"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- LCP element: start the hero fetch before the bundle parses. -->
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1920&h=1080&q=80"
+      imagesrcset="
+        https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=900&h=506&q=80 900w,
+        https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1440&h=810&q=80 1440w,
+        https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1920&h=1080&q=80 1920w,
+        https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=2400&h=1350&q=80 2400w"
+      imagesizes="100vw"
+    />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+
+    <script>
+      // Resolve the theme before first paint so the page never flashes.
+      (function () {
+        try {
+          var stored = localStorage.getItem('serafina-theme');
+          var theme =
+            stored === 'dark' || stored === 'light'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark';
+          document.documentElement.dataset.theme = theme;
+        } catch (e) {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
