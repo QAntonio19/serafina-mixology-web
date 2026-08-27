@@ -23,6 +23,7 @@ export const NAV = [
 
 export const HERO = {
   eyebrow: 'Coctelería para eventos',
+  word: 'Barra',
   headA: 'Usted pone la fiesta.',
   headB: 'Nosotros la barra.',
   sub: 'Llevamos la barra móvil, los bartenders y una carta de autor a su boda, evento corporativo o fiesta privada.',
@@ -53,48 +54,78 @@ export const DRINKS: Drink[] = [
     base: 'Gin & Piña',
     body: 'Gin infusionado, cordial de piña, menta fresca y garnish de piña deshidratada colocada a mano.',
     image: IDS.alba,
-    alt: 'Mixólogo con guantes negros colocando garnish de piña deshidratada sobre coctel fresco',
+    alt: 'Alba Tropical, coctel de autor de Serafina Mixology',
+    cutout: true,
   },
   {
     name: 'Ámbar Especiado',
     base: 'Bourbon',
     body: 'Bourbon premium, rodaja de naranja fresca, canela en rama y anís estrellado.',
     image: IDS.ambar,
-    alt: 'Coctel en vaso old fashioned con rodaja de naranja, canela y anís estrellado',
+    alt: 'Ámbar Especiado, coctel de autor de Serafina Mixology',
+    cutout: true,
   },
   {
     name: 'Grana Jamaica',
     base: 'Mezcal',
     body: 'Mezcal artesanal, infusión de flor de jamaica deshidratada y escarchado de chile piquín.',
     image: IDS.grana,
-    alt: 'Coctel rojo coronado con flor de jamaica deshidratada y escarcha de chile en el borde',
+    alt: 'Grana Jamaica, coctel de autor de Serafina Mixology',
+    cutout: true,
   },
   {
     name: 'Bruma & Ocaso',
     base: 'Aperitivo & Mezcal',
     body: 'Dúo de coctelería: trago cítrico refrescante con hierbabuena y negroni de autor en cristal tallado.',
     image: IDS.bruma,
-    alt: 'Dos cocteles artesanales sobre pedestal dorado brillante reflejante',
+    alt: 'Bruma & Ocaso, coctel de autor de Serafina Mixology',
+    cutout: true,
   },
   {
     name: 'Colección de Autor',
     base: 'Destilados Finos',
     body: 'Trilogía botánica con flores comestibles, cítricos frescos y licores de casa.',
     image: IDS.ocaso,
-    alt: 'Selección de cocteles vibrantes alineados con decoraciones florales en la barra',
+    alt: 'Colección de Autor, coctel de autor de Serafina Mixology',
+    cutout: true,
   },
   {
     name: 'Nocturno',
     base: 'Whisky & Café',
     body: 'Whisky, café de olla artesanal, notas de cacao y espuma cremosa con granos de café.',
     image: IDS.nocturno,
-    alt: 'Coctel con espuma densa y granos de café tostado sobre la barra',
+    alt: 'Nocturno, coctel de autor de Serafina Mixology',
+    cutout: true,
+  },
+  {
+    name: 'Tamarindo Bravo',
+    base: 'Ron & Tamarindo',
+    body: 'Ron añejo, puré de tamarindo, chile guajillo y sal de gusano en el borde.',
+    image: IDS.tamarindo,
+    alt: 'Tamarindo Bravo, coctel de autor de Serafina Mixology',
+    cutout: true,
+  },
+  {
+    name: 'Flor de Saúco',
+    base: 'Vodka & Saúco',
+    body: 'Vodka premium, licor de flor de saúco, pepino fresco y un toque de albahaca.',
+    image: IDS.saucoFlor,
+    alt: 'Flor de Saúco, coctel de autor de Serafina Mixology',
+    cutout: true,
+  },
+  {
+    name: 'Ceniza y Miel',
+    base: 'Tequila & Miel',
+    body: 'Tequila reposado, miel de agave quemada, limón fresco y humo de romero al servir.',
+    image: IDS.cenizaMiel,
+    alt: 'Ceniza y Miel, coctel de autor de Serafina Mixology',
+    cutout: true,
   },
 ];
 
 export const CARTA = {
   label: 'La carta',
-  head: 'Seis de autor, y la que usted quiera',
+  head: 'Nueve de autor, y la que usted quiera',
   note: 'La armamos con ustedes en una cata previa.',
 } as const;
 
@@ -268,9 +299,12 @@ export const COBERTURA = {
   label: 'Cobertura',
   head: 'Dónde llegamos',
   body: 'Cubrimos Tijuana, Rosarito, Ensenada y todo el Valle de Guadalupe sin costo de traslado. Fuera de esa zona se cotiza aparte, y sí, viajamos.',
-  cta: 'Escribir por WhatsApp',
-  image: IDS.equipo,
-  alt: 'Los dos bartenders de Serafina detrás de la barra',
+  cta: 'Escríbanos su zona por WhatsApp',
+  zonas: [
+    { city: 'San Diego', note: 'Eventos cruzando la frontera' },
+    { city: 'Tijuana', note: 'Base de operaciones' },
+    { city: 'Valle de Guadalupe', note: 'Bodas y viñedos' },
+  ],
 } as const;
 
 export const COTIZAR = {

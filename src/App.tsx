@@ -10,11 +10,8 @@ import Resenas from './components/Resenas';
 import Servicio from './components/Servicio';
 import Talleres from './components/Talleres';
 import Wordmark from './components/Wordmark';
-import { useTheme } from './lib/useTheme';
 
 export default function App() {
-  const { theme, toggle } = useTheme();
-
   return (
     <div className="min-h-[100svh] bg-paper">
       <a
@@ -24,7 +21,7 @@ export default function App() {
         Saltar al contenido
       </a>
 
-      <Nav theme={theme} onToggleTheme={toggle} />
+      <Nav />
       <Hero />
 
       <main id="contenido">

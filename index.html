@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,8 +9,7 @@
       name="description"
       content="Barra de mixología para bodas, eventos corporativos, fiestas privadas y talleres en Tijuana y Valle de Guadalupe. Llevamos la barra, los bartenders y una carta de autor. Cotización en dos días."
     />
-    <meta name="theme-color" content="#131312" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#FBFAF8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#FBFAF8" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Serafina Mixology" />
@@ -38,24 +37,6 @@
       imagesizes="100vw"
     />
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
-
-    <script>
-      // Resolve the theme before first paint so the page never flashes.
-      (function () {
-        try {
-          var stored = localStorage.getItem('serafina-theme');
-          var theme =
-            stored === 'dark' || stored === 'light'
-              ? stored
-              : window.matchMedia('(prefers-color-scheme: light)').matches
-                ? 'light'
-                : 'dark';
-          document.documentElement.dataset.theme = theme;
-        } catch (e) {
-          document.documentElement.dataset.theme = 'dark';
-        }
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>

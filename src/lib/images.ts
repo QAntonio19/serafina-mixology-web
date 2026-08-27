@@ -28,21 +28,30 @@ export const photo = (src: string, w: number, ratio: number) =>
   isLocal(src) ? src : unsplash(src, w, Math.round(w * ratio));
 
 export const IDS = {
-  /* The hero scene. */
-  heroScene: '/fotos/pina-garnish.jpg',
+  /* The nav logomark, transparent PNG. */
+  logo: '/fotos/logo.png',
 
-  /* La carta. All real photos from Serafina Mixology Instagram */
-  alba: '/fotos/pina-garnish.jpg',
-  bruma: '/fotos/duo-dorado.jpg',
-  ambar: '/fotos/ambar-especia.jpg',
-  grana: '/fotos/jamaica-mezcal.jpg',
-  ocaso: '/fotos/cocteles-autor.png',
-  nocturno: '/fotos/nocturno.jpg',
+  /* The hero scene, and the sequence it cycles through. Kept as its own
+     array (not spread into IDS) since it's an ordered list, not a
+     lookup by name. */
+  heroScene: '/fotos/hero-barra.png',
+
+  /* La carta. Cut-out product shots, transparent background. */
+  alba: '/fotos/carta-04.png',
+  ambar: '/fotos/carta-05.png',
+  grana: '/fotos/carta-06.png',
+  bruma: '/fotos/carta-07.png',
+  ocaso: '/fotos/carta-08.png',
+  nocturno: '/fotos/carta-09.png',
+  tamarindo: '/fotos/carta-01.png',
+  saucoFlor: '/fotos/carta-02.png',
+  cenizaMiel: '/fotos/carta-03.png',
 
   /* The service and the set-up, also real. */
   barman: '/fotos/barra-servicio.jpg',
   barmanSombrilla: '/fotos/banda-sombrilla.jpg',
   equipo: '/fotos/cobertura-equipo.jpg',
+  coberturaMapa: '/fotos/cobertura-mapa.png',
 
   /* Guests at real events, one per review in the rotator. */
   resena1: '/fotos/resena-1.jpg',
@@ -56,6 +65,18 @@ export const IDS = {
   privadas: '/fotos/evento-privadas.jpg',
   corporativos: '/fotos/evento-corporativos.jpg',
 } as const;
+
+/** The hero photo, cycling through this sequence in order — first the
+ *  original scene, then the rest in the order they were shot. */
+export const HERO_SEQUENCE = [
+  IDS.heroScene,
+  '/fotos/hero-seq-02.png',
+  '/fotos/hero-seq-03.png',
+  '/fotos/hero-seq-04.png',
+  '/fotos/hero-seq-05.png',
+  '/fotos/hero-seq-06.png',
+  '/fotos/hero-seq-07.png',
+] as const;
 
 export const RATIO = {
   tall: 5 / 4,

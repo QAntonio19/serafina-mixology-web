@@ -1,24 +1,18 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { List, MoonStars, Sun, X } from '../lib/icons';
+import { List, X } from '../lib/icons';
 import { BRAND, NAV } from '../lib/content';
+import { IDS } from '../lib/images';
 import { EASE } from '../lib/motion';
 import { solidCls } from './ui';
-import type { Theme } from '../lib/useTheme';
 
-type Props = { theme: Theme; onToggleTheme: () => void };
+/* alt="" since the parent link already carries the accessible name via
+   aria-label — an image-only logo would otherwise announce twice. */
+const Wordmark = () => <img src={IDS.logo} alt="" className="h-10 w-auto" />;
 
-const Wordmark = () => (
-  <span className="flex flex-col items-start gap-[3px]">
-    <span className="brand text-[1.05rem] sm:text-[1.2rem]">{BRAND.name}</span>
-    <span className="brand-sub text-[0.42rem] text-ink-muted sm:text-[0.47rem]">
-      {BRAND.sub}
-    </span>
-  </span>
-);
-
-export default function Nav({ theme, onToggleTheme }: Props) {
+export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -31,11 +25,33 @@ export default function Nav({ theme, onToggleTheme }: Props) {
     };
   }, [open]);
 
-  const themeLabel = theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro';
+  /* Hides on the way down, reappears on the way up. Small jitters
+     (under 6px) are ignored so a trackpad's momentum doesn't flicker
+     it, and it always shows near the very top regardless of direction. */
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      if (y < 80) {
+        setHidden(false);
+      } else if (Math.abs(delta) > 6) {
+        setHidden(delta > 0);
+      }
+      lastY = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur">
+      <header
+        className={
+          'fixed inset-x-0 top-0 z-40 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ' +
+          (hidden ? '-translate-y-full' : 'translate-y-0')
+        }
+      >
         <nav
           aria-label="Principal"
           className="mx-auto flex h-[60px] w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8"
@@ -57,16 +73,6 @@ export default function Nav({ theme, onToggleTheme }: Props) {
           </div>
 
           <div className="flex items-center gap-1">
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              aria-label={themeLabel}
-              title={themeLabel}
-              className="grid h-11 w-11 place-items-center text-ink transition-opacity hover:opacity-60"
-            >
-              {theme === 'dark' ? <Sun size={17} /> : <MoonStars size={17} />}
-            </button>
-
             <button
               type="button"
               onClick={() => setOpen(true)}
