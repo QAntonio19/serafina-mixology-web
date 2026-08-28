@@ -171,7 +171,7 @@ export default function Hero() {
             the pitch text instead of leaving a gap above it */}
         <div
           aria-hidden
-          className="absolute -right-28 -top-20 h-[min(80svh,900px)] w-[min(80svh,900px)] overflow-hidden rounded-full bg-invert"
+          className="pointer-events-none absolute -right-28 -top-20 z-50 h-[min(80svh,900px)] w-[min(80svh,900px)] overflow-hidden rounded-full bg-invert"
         >
           <svg className="absolute inset-0 h-full w-full opacity-[0.16]">
             <filter id="heroDiscGrain">
