@@ -167,7 +167,7 @@ export default function Carta() {
             <Label>{CARTA.label}</Label>
           </motion.div>
           <motion.div variants={rise}>
-            <Display className="max-w-[18ch] text-ink">{CARTA.head}</Display>
+            <Display className="max-w-[23ch] text-ink">{CARTA.head}</Display>
           </motion.div>
           <motion.p
             variants={rise}

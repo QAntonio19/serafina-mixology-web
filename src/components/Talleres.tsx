@@ -35,7 +35,7 @@ export default function Talleres() {
             <Reveal>
               <motion.div variants={rise}>
                 <Label className="mb-3 text-ink-faint">Team Building & Experiencias</Label>
-                <Display className="max-w-[16ch] text-ink">
+                <Display className="max-w-[13ch] text-ink">
                   Talleres de mixología para equipos
                 </Display>
               </motion.div>

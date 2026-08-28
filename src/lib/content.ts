@@ -136,16 +136,22 @@ export const RAZONES = {
       icon: 'bar' as const,
       title: 'Barra completa',
       body: 'Barra móvil, cristalería, hielo tallado a mano, destilados, cordiales de casa y dos bartenders uniformados.',
+      image: IDS.barman,
+      alt: 'Bartenders de Serafina sirviendo cocteles en la barra montada',
     },
     {
       icon: 'menu' as const,
       title: 'Carta a la medida',
       body: 'Una cata previa para ajustar los tragos a su gusto. Siempre van dos opciones sin alcohol.',
+      image: IDS.cartaAutor,
+      alt: 'Selección de cocteles de autor de Serafina Mixology alineados en la barra',
     },
     {
       icon: 'clean' as const,
       title: 'Montaje y limpieza',
       body: 'Llegamos tres horas antes y nos vamos sin dejar rastro. Solo necesitamos dos metros y una toma de corriente.',
+      image: IDS.montaje,
+      alt: 'Montaje de la barra móvil de Serafina Mixology',
     },
   ],
 } as const;

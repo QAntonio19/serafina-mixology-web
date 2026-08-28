@@ -50,6 +50,8 @@ export const IDS = {
   /* The service and the set-up, also real. */
   barman: '/fotos/barra-servicio.jpg',
   barmanSombrilla: '/fotos/banda-sombrilla.jpg',
+  montaje: '/fotos/barra-montaje.jpg',
+  cartaAutor: '/fotos/cocteles-autor.png',
   equipo: '/fotos/cobertura-equipo.jpg',
   coberturaMapa: '/fotos/cobertura-mapa.png',
 

@@ -1,6 +1,7 @@
 ﻿import { motion, useReducedMotion } from "motion/react";
 import { Broom, ClipboardText, Martini } from "../lib/icons";
 import { RAZONES, STATEMENT } from "../lib/content";
+import { RATIO, photo, srcSet } from "../lib/images";
 import { EASE, rise, riseParent, inView } from "../lib/motion";
 import { Display, Reveal, Shell } from "./ui";
 
@@ -82,45 +83,59 @@ export default function Servicio() {
                           }
                     }
                     transition={{ duration: 0.35, ease: EASE }}
-                    className="group relative flex h-full flex-col overflow-hidden bg-paper p-8 md:p-10"
+                    className="group relative flex h-full flex-col overflow-hidden bg-paper"
                     style={{ boxShadow: "0 2px 8px -2px rgba(20,20,20,0.06)" }}
                   >
                     <InkBar delay={i * 0.1} />
 
-                    {/* Watermark number */}
-                    <span
-                      aria-hidden
-                      className="display pointer-events-none absolute right-5 top-3 select-none text-[6.5rem] font-bold leading-none text-ink/[0.04] transition-opacity duration-500 group-hover:text-ink/[0.09] md:text-[8rem]"
-                    >
-                      {num}
-                    </span>
-
-                    {/* Icon */}
-                    <div className="relative mt-8 mb-8 flex items-center gap-4">
-                      <span className="grid h-12 w-12 place-items-center border border-ink/20 text-ink transition-all duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-paper">
-                        <Icon size={22} />
-                      </span>
-                      <span className="label text-ink-faint">{num}</span>
+                    <div className="aspect-[4/3] overflow-hidden bg-plate">
+                      <img
+                        src={photo(item.image, 800, RATIO.landscape)}
+                        srcSet={srcSet(item.image, RATIO.landscape, [400, 600, 800])}
+                        sizes="(min-width: 768px) 31vw, 92vw"
+                        alt={item.alt}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+                      />
                     </div>
 
-                    {/* Text */}
-                    <h3 className="display mb-3 text-[1.3rem] leading-tight text-ink">
-                      {item.title}
-                    </h3>
-                    <p className="mt-1 flex-1 text-[0.9rem] leading-relaxed text-ink-muted">
-                      {item.body}
-                    </p>
-
-                    {/* Link */}
-                    <a
-                      href="#cotizar"
-                      className="mt-8 inline-flex items-center gap-2 text-[0.75rem] font-medium uppercase tracking-[0.1em] text-ink transition-opacity duration-200 hover:opacity-55"
-                    >
-                      Incluir en mi evento
-                      <span aria-hidden className="text-base leading-none">
-                        →
+                    <div className="relative flex flex-1 flex-col p-8 md:p-10">
+                      {/* Watermark number */}
+                      <span
+                        aria-hidden
+                        className="display pointer-events-none absolute right-5 top-3 select-none text-[6.5rem] font-bold leading-none text-ink/[0.04] transition-opacity duration-500 group-hover:text-ink/[0.09] md:text-[8rem]"
+                      >
+                        {num}
                       </span>
-                    </a>
+
+                      {/* Icon */}
+                      <div className="relative mb-8 flex items-center gap-4">
+                        <span className="grid h-12 w-12 place-items-center border border-ink/20 text-ink transition-all duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-paper">
+                          <Icon size={22} />
+                        </span>
+                        <span className="label text-ink-faint">{num}</span>
+                      </div>
+
+                      {/* Text */}
+                      <h3 className="display mb-3 text-[1.3rem] leading-tight text-ink">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1 flex-1 text-[0.9rem] leading-relaxed text-ink-muted">
+                        {item.body}
+                      </p>
+
+                      {/* Link */}
+                      <a
+                        href="#cotizar"
+                        className="mt-8 inline-flex items-center gap-2 text-[0.75rem] font-medium uppercase tracking-[0.1em] text-ink transition-opacity duration-200 hover:opacity-55"
+                      >
+                        Incluir en mi evento
+                        <span aria-hidden className="text-base leading-none">
+                          →
+                        </span>
+                      </a>
+                    </div>
                   </motion.div>
                 </motion.div>
               );
@@ -154,7 +169,7 @@ export default function Servicio() {
 
             <motion.h2
               variants={rise}
-              className="display max-w-[18ch] text-[clamp(2.4rem,5.8vw,4.8rem)] leading-[1.03] text-paper"
+              className="display max-w-[27ch] text-[clamp(2.4rem,5.8vw,4.8rem)] leading-[1.03] text-paper"
             >
               {STATEMENT.head}
             </motion.h2>

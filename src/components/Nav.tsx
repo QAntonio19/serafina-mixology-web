@@ -8,7 +8,7 @@ import { solidCls } from './ui';
 
 /* alt="" since the parent link already carries the accessible name via
    aria-label — an image-only logo would otherwise announce twice. */
-const Wordmark = () => <img src={IDS.logo} alt="" className="h-10 w-auto" />;
+const Wordmark = () => <img src={IDS.logo} alt="" className="h-14 w-auto" />;
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -48,13 +48,13 @@ export default function Nav() {
     <>
       <header
         className={
-          'fixed inset-x-0 top-0 z-40 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ' +
+          'fixed inset-x-0 top-0 z-40 border-b border-line bg-paper transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ' +
           (hidden ? '-translate-y-full' : 'translate-y-0')
         }
       >
         <nav
           aria-label="Principal"
-          className="mx-auto flex h-[60px] w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8"
+          className="mx-auto flex h-20 w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8"
         >
           <a href="#top" aria-label={BRAND.full}>
             <Wordmark />
@@ -98,7 +98,7 @@ export default function Nav() {
             exit={{ opacity: 0, transition: { duration: 0.2, ease: EASE } }}
             transition={{ duration: 0.28, ease: EASE }}
           >
-            <div className="flex h-[60px] items-center justify-between border-b border-line px-4 sm:px-6">
+            <div className="flex h-20 items-center justify-between border-b border-line px-4 sm:px-6">
               <Wordmark />
               <button
                 type="button"

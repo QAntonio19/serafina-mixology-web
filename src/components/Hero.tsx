@@ -5,25 +5,6 @@ import { HERO_SEQUENCE, photo } from '../lib/images';
 import { EASE } from '../lib/motion';
 import { Shell, outlineCls, solidCls } from './ui';
 
-/** A loose scatter of dried garnish, standing in for spilled berries —
- *  drawn as flat dots since there is no shot of the real thing loose on
- *  a pale ground. Fixed positions, not random: a decorative cluster
- *  should look art-directed, not reshuffle on every render. */
-const SCATTER = [
-  { top: '4%', left: '10%', size: 15 },
-  { top: '0%', left: '34%', size: 11 },
-  { top: '22%', left: '0%', size: 12 },
-  { top: '28%', left: '22%', size: 16 },
-  { top: '18%', left: '46%', size: 9 },
-  { top: '46%', left: '8%', size: 10 },
-  { top: '52%', left: '32%', size: 13 },
-  { top: '38%', left: '58%', size: 8 },
-  { top: '64%', left: '18%', size: 11 },
-  { top: '68%', left: '44%', size: 9 },
-  { top: '10%', left: '64%', size: 7 },
-  { top: '58%', left: '60%', size: 10 },
-] as const;
-
 /** How long one photo holds before the sequence cycles to the next. */
 const HOLD_MS = 5000;
 
@@ -102,7 +83,7 @@ export default function Hero() {
   );
 
   return (
-    <header id="top" className="relative overflow-hidden bg-[#C9A46B]">
+    <header id="top" className="relative overflow-hidden bg-[#C9A46B] pt-20">
       {/* real wood grain, procedural: turbulence stretched into long
           streaks, then remapped from grayscale into an oak colour ramp
           — the same recipe as the classic SVG "wood" filter, kept light
@@ -161,18 +142,18 @@ export default function Hero() {
       {/* ============================================================ */}
       {/* Desktop: the full poster                                      */}
       {/* ============================================================ */}
-      <div className="relative hidden h-[100svh] lg:block">
+      <div className="relative hidden h-[calc(100svh-80px)] lg:block">
         <span
           aria-hidden
           className="absolute left-10 top-16 h-16 w-16 rounded-full border border-ink/20 xl:left-14"
         />
 
-        {/* dark textured disc with a ghost stat behind the photo — sized
-            off the viewport like the photo, so it reaches down toward
-            the pitch text instead of leaving a gap above it */}
+        {/* dark textured disc with a ghost stat, kept modest on purpose
+            — the drink in the middle is the thing to look at, this is
+            just a trust signal in the corner, not a second focal point */}
         <div
           aria-hidden
-          className="absolute -right-28 -top-20 h-[min(80svh,900px)] w-[min(80svh,900px)] overflow-hidden rounded-full bg-invert"
+          className="absolute -right-16 -top-14 h-[min(52svh,560px)] w-[min(52svh,560px)] overflow-hidden rounded-full bg-invert"
         >
           <svg className="absolute inset-0 h-full w-full opacity-[0.16]">
             <filter id="heroDiscGrain">
@@ -185,18 +166,18 @@ export default function Hero() {
             {/* a sharp-pointed star, not Phosphor's rounder one — a
                 deep inner radius (0.38 of the outer) is what gives a
                 star its point rather than a blunt pinwheel look */}
-            <svg viewBox="0 0 100 100" width={56} height={56} fill="currentColor" aria-hidden>
+            <svg viewBox="0 0 100 100" width={36} height={36} fill="currentColor" aria-hidden>
               <polygon points="50,2 60.58,35.44 95.65,35.17 67.12,55.56 78.21,88.83 50,68 21.79,88.83 32.88,55.56 4.35,35.17 39.42,35.44" />
             </svg>
-            <p className="display mt-2 leading-none" style={{ fontSize: 'clamp(9rem, 16vw, 13rem)' }}>
+            <p className="display mt-2 leading-none" style={{ fontSize: 'clamp(5.5rem, 9vw, 7.5rem)' }}>
               4.9<span style={{ fontSize: '0.32em' }}>/5</span>
             </p>
-            <p className="label mt-3 text-on-invert">Calificación de reseñas</p>
+            <p className="label mt-2 text-on-invert">Calificación de reseñas</p>
           </div>
         </div>
 
         {/* eyebrow, tagline and the two calls to action */}
-        <motion.div {...rise(0)} className="absolute left-9 top-24 max-w-[24ch] xl:left-14">
+        <motion.div {...rise(0)} className="absolute left-9 top-24 max-w-[270px] xl:left-14 xl:max-w-[320px]">
           <p className="label mb-4 text-ink/80">{HERO.eyebrow}</p>
           <p className="display text-[1.55rem] leading-tight text-ink xl:text-[1.8rem]">
             {HERO.headA} {HERO.headB}
@@ -214,7 +195,7 @@ export default function Hero() {
         {/* the giant word, bled under the photograph */}
         <motion.div
           {...rise(0.16)}
-          className="absolute left-0 top-[62%] flex -translate-y-1/2 items-stretch gap-5 pl-6 xl:pl-10"
+          className="absolute left-0 top-[72%] flex -translate-y-1/2 items-stretch gap-5 pl-6 xl:pl-10"
         >
           <span aria-hidden className="w-2 shrink-0 bg-ink" />
           <h1 className="display whitespace-nowrap text-[clamp(6.5rem,13vw,11rem)] leading-none text-ink">
@@ -234,20 +215,9 @@ export default function Hero() {
           {...photoHoverProps}
           className="absolute left-[34%] top-[8%] -rotate-6"
         >
-          {photoSpacer('max-w-[40vw] max-h-[calc(100svh-165px)] xl:max-w-[660px]')}
+          {photoSpacer('max-w-[34vw] max-h-[calc(100svh-260px)] xl:max-w-[680px]')}
           {photoImg('drop-shadow-[0_40px_80px_rgba(0,0,0,0.45)]')}
         </motion.figure>
-
-        {/* scattered garnish, bottom-left */}
-        <div aria-hidden className="absolute bottom-24 left-12 h-24 w-40 xl:left-16">
-          {SCATTER.map((b, i) => (
-            <span
-              key={i}
-              className="absolute rounded-full bg-ink/75"
-              style={{ top: b.top, left: b.left, width: b.size, height: b.size }}
-            />
-          ))}
-        </div>
 
         {/* the pitch, tucked into the corner, clear of the stats bar
             fixed to the very bottom of this same viewport-height box */}
@@ -289,7 +259,7 @@ export default function Hero() {
       {/* Small screens: the same pieces, stacked in reading order       */}
       {/* ============================================================ */}
       <div className="relative lg:hidden">
-        <Shell className="relative pt-10">
+        <Shell className="relative pt-6">
           <motion.p {...rise(0)} className="label mb-4 text-ink/80">
             {HERO.eyebrow}
           </motion.p>
