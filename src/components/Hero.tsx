@@ -1,5 +1,11 @@
-import { useEffect, useState } from 'react';
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'motion/react';
 import { HERO, STATS } from '../lib/content';
 import { HERO_SEQUENCE, photo } from '../lib/images';
 import { EASE } from '../lib/motion';
@@ -24,6 +30,23 @@ export default function Hero() {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.8, ease: EASE, delay },
   });
+
+  /* The drink drifts down as the section scrolls by — tied to the
+     hero's own scroll progress (0 as its top hits the viewport top, 1
+     as its bottom does), so it drifts exactly across the section's
+     lifespan rather than the whole page's. A separate motion.div holds
+     this, since the entrance rise() above already animates `y` once on
+     mount; two animated values on the same element would fight. */
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start'],
+  });
+  const photoScrollY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduce ? ['0vh', '0vh'] : ['0vh', '65vh'],
+  );
 
   /* The hero photo cycles through HERO_SEQUENCE on its own, pausable by
      hover or keyboard focus. The box it sits in keeps the first photo's
@@ -83,7 +106,7 @@ export default function Hero() {
   );
 
   return (
-    <header id="top" className="relative overflow-hidden bg-[#C9A46B] pt-20">
+    <header id="top" ref={heroRef} className="relative overflow-hidden bg-[#C9A46B]">
       {/* real wood grain, procedural: turbulence stretched into long
           streaks, then remapped from grayscale into an oak colour ramp
           — the same recipe as the classic SVG "wood" filter, kept light
@@ -142,18 +165,13 @@ export default function Hero() {
       {/* ============================================================ */}
       {/* Desktop: the full poster                                      */}
       {/* ============================================================ */}
-      <div className="relative hidden h-[calc(100svh-80px)] lg:block">
-        <span
-          aria-hidden
-          className="absolute left-10 top-16 h-16 w-16 rounded-full border border-ink/20 xl:left-14"
-        />
-
-        {/* dark textured disc with a ghost stat, kept modest on purpose
-            — the drink in the middle is the thing to look at, this is
-            just a trust signal in the corner, not a second focal point */}
+      <div className="relative hidden h-[100svh] lg:block">
+        {/* dark textured disc with a ghost stat behind the photo — sized
+            off the viewport like the photo, so it reaches down toward
+            the pitch text instead of leaving a gap above it */}
         <div
           aria-hidden
-          className="absolute -right-16 -top-14 h-[min(52svh,560px)] w-[min(52svh,560px)] overflow-hidden rounded-full bg-invert"
+          className="absolute -right-28 -top-20 h-[min(80svh,900px)] w-[min(80svh,900px)] overflow-hidden rounded-full bg-invert"
         >
           <svg className="absolute inset-0 h-full w-full opacity-[0.16]">
             <filter id="heroDiscGrain">
@@ -166,42 +184,43 @@ export default function Hero() {
             {/* a sharp-pointed star, not Phosphor's rounder one — a
                 deep inner radius (0.38 of the outer) is what gives a
                 star its point rather than a blunt pinwheel look */}
-            <svg viewBox="0 0 100 100" width={36} height={36} fill="currentColor" aria-hidden>
+            <svg viewBox="0 0 100 100" width={56} height={56} fill="currentColor" aria-hidden>
               <polygon points="50,2 60.58,35.44 95.65,35.17 67.12,55.56 78.21,88.83 50,68 21.79,88.83 32.88,55.56 4.35,35.17 39.42,35.44" />
             </svg>
-            <p className="display mt-2 leading-none" style={{ fontSize: 'clamp(5.5rem, 9vw, 7.5rem)' }}>
+            <p className="display mt-2 leading-none" style={{ fontSize: 'clamp(9rem, 16vw, 13rem)' }}>
               4.9<span style={{ fontSize: '0.32em' }}>/5</span>
             </p>
-            <p className="label mt-2 text-on-invert">Calificación de reseñas</p>
+            <p className="label mt-3 text-on-invert">Calificación de reseñas</p>
           </div>
         </div>
 
-        {/* eyebrow, tagline and the two calls to action */}
-        <motion.div {...rise(0)} className="absolute left-9 top-24 max-w-[270px] xl:left-14 xl:max-w-[320px]">
-          <p className="label mb-4 text-ink/80">{HERO.eyebrow}</p>
-          <p className="display text-[1.55rem] leading-tight text-ink xl:text-[1.8rem]">
-            {HERO.headA} {HERO.headB}
-          </p>
-          <div className="mt-6 flex items-center gap-2.5">
-            <a href="#cotizar" className={`${solidCls} h-9 px-4 text-[0.68rem]`}>
-              {HERO.ctaPrimary}
-            </a>
-            <a href="#carta" className={`${outlineCls} h-9 px-4 text-[0.68rem]`}>
-              {HERO.ctaSecondary}
-            </a>
-          </div>
-        </motion.div>
+        {/* the giant word, bled under the photograph, with the eyebrow,
+            tagline and calls to action stacked directly under it — one
+            group instead of two independently-placed blocks, so the
+            text always sits below BARRA regardless of viewport size */}
+        <div className="absolute left-0 top-[52%] flex -translate-y-1/2 flex-col gap-8 pl-6 xl:pl-10">
+          <motion.div {...rise(0.16)} className="flex items-stretch gap-5">
+            <span aria-hidden className="w-2 shrink-0 bg-ink" />
+            <h1 className="display whitespace-nowrap text-[clamp(6.5rem,13vw,11rem)] leading-none text-ink">
+              {HERO.word}
+            </h1>
+          </motion.div>
 
-        {/* the giant word, bled under the photograph */}
-        <motion.div
-          {...rise(0.16)}
-          className="absolute left-0 top-[72%] flex -translate-y-1/2 items-stretch gap-5 pl-6 xl:pl-10"
-        >
-          <span aria-hidden className="w-2 shrink-0 bg-ink" />
-          <h1 className="display whitespace-nowrap text-[clamp(6.5rem,13vw,11rem)] leading-none text-ink">
-            {HERO.word}
-          </h1>
-        </motion.div>
+          <motion.div {...rise(0.3)} className="max-w-[270px] xl:max-w-[320px]">
+            <p className="label mb-4 text-ink/80">{HERO.eyebrow}</p>
+            <p className="display text-[1.55rem] leading-tight text-ink xl:text-[1.8rem]">
+              {HERO.headA} {HERO.headB}
+            </p>
+            <div className="mt-6 flex items-center gap-2.5">
+              <a href="#cotizar" className={`${solidCls} h-9 px-4 text-[0.68rem]`}>
+                {HERO.ctaPrimary}
+              </a>
+              <a href="#carta" className={`${outlineCls} h-9 px-4 text-[0.68rem]`}>
+                {HERO.ctaSecondary}
+              </a>
+            </div>
+          </motion.div>
+        </div>
 
         {/* the product-style shot, tilted, overlapping both. The box is
             constrained by width AND height at once (both as max-) so a
@@ -210,13 +229,15 @@ export default function Hero() {
             first photo at every breakpoint; later photos in the
             sequence are framed inside it with object-contain rather
             than resizing the box, so the layout never shifts. */}
-        <motion.figure
-          {...rise(0.3)}
-          {...photoHoverProps}
-          className="absolute left-[34%] top-[8%] -rotate-6"
-        >
-          {photoSpacer('max-w-[34vw] max-h-[calc(100svh-260px)] xl:max-w-[680px]')}
-          {photoImg('drop-shadow-[0_40px_80px_rgba(0,0,0,0.45)]')}
+        <motion.figure {...rise(0.3)} className="absolute left-[34%] top-[8%]">
+          <motion.div
+            {...photoHoverProps}
+            style={{ y: photoScrollY, rotate: -6 }}
+            className="relative inline-block"
+          >
+            {photoSpacer('max-w-[40vw] max-h-[calc(100svh-165px)] xl:max-w-[660px]')}
+            {photoImg('drop-shadow-[0_40px_80px_rgba(0,0,0,0.45)]')}
+          </motion.div>
         </motion.figure>
 
         {/* the pitch, tucked into the corner, clear of the stats bar
@@ -259,7 +280,7 @@ export default function Hero() {
       {/* Small screens: the same pieces, stacked in reading order       */}
       {/* ============================================================ */}
       <div className="relative lg:hidden">
-        <Shell className="relative pt-6">
+        <Shell className="relative pt-10">
           <motion.p {...rise(0)} className="label mb-4 text-ink/80">
             {HERO.eyebrow}
           </motion.p>

@@ -48,13 +48,13 @@ export default function Nav() {
     <>
       <header
         className={
-          'fixed inset-x-0 top-0 z-40 border-b border-line bg-paper transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ' +
+          'fixed inset-x-0 top-0 z-40 bg-paper/30 backdrop-blur-md transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ' +
           (hidden ? '-translate-y-full' : 'translate-y-0')
         }
       >
         <nav
           aria-label="Principal"
-          className="mx-auto flex h-20 w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8"
+          className="mx-auto flex h-[60px] w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8"
         >
           <a href="#top" aria-label={BRAND.full}>
             <Wordmark />
@@ -66,6 +66,7 @@ export default function Nav() {
                 key={item.href}
                 href={item.href}
                 className="label text-ink transition-opacity hover:opacity-60"
+                style={{ fontSize: '0.95rem', fontWeight: 700 }}
               >
                 {item.label}
               </a>
@@ -98,7 +99,7 @@ export default function Nav() {
             exit={{ opacity: 0, transition: { duration: 0.2, ease: EASE } }}
             transition={{ duration: 0.28, ease: EASE }}
           >
-            <div className="flex h-20 items-center justify-between border-b border-line px-4 sm:px-6">
+            <div className="flex h-[60px] items-center justify-between border-b border-line px-4 sm:px-6">
               <Wordmark />
               <button
                 type="button"

@@ -13,7 +13,7 @@ export default function Eventos() {
         <Reveal className="mb-8 flex items-start justify-between gap-6 md:mb-10">
           <motion.div variants={rise}>
             <Label className="mb-3">Eventos</Label>
-            <Display className="max-w-[16ch] text-ink">
+            <Display className="max-w-[19ch] text-ink">
               Para el evento que esté armando
             </Display>
           </motion.div>
