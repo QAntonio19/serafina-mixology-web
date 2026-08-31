@@ -13,6 +13,8 @@ export { Martini } from '@phosphor-icons/react/dist/csr/Martini';
 export { Pause } from '@phosphor-icons/react/dist/csr/Pause';
 export { Play } from '@phosphor-icons/react/dist/csr/Play';
 export { Star } from '@phosphor-icons/react/dist/csr/Star';
+export { Timer } from '@phosphor-icons/react/dist/csr/Timer';
+export { Users } from '@phosphor-icons/react/dist/csr/Users';
 export { Warning } from '@phosphor-icons/react/dist/csr/Warning';
 export { WhatsappLogo } from '@phosphor-icons/react/dist/csr/WhatsappLogo';
 export { X } from '@phosphor-icons/react/dist/csr/X';

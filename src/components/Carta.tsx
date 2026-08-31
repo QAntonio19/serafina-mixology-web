@@ -40,7 +40,7 @@ function DrinkCard({ drink: d, hasNext }: { drink: Drink; hasNext: boolean }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex items-center gap-4 sm:gap-5">
+    <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:gap-5 sm:text-left">
       {d.cutout ? (
         <div className="flex h-52 shrink-0 items-end sm:h-64 md:h-80">
           <img

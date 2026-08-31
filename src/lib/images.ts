@@ -36,6 +36,10 @@ export const IDS = {
      lookup by name. */
   heroScene: '/fotos/hero-barra.png',
 
+  /* The hero's full-bleed night shot: the three drinks already sitting
+     on a real bar counter, the party blurred behind. */
+  heroBg: '/fotos/hero-bar-crowd.png',
+
   /* La carta. Cut-out product shots, transparent background. */
   alba: '/fotos/carta-04.png',
   ambar: '/fotos/carta-05.png',

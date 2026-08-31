@@ -18,7 +18,6 @@ export const NAV = [
   { label: 'Eventos', href: '#eventos' },
   { label: 'Talleres', href: '#talleres' },
   { label: 'El servicio', href: '#servicio' },
-  { label: 'Cotizar', href: '#cotizar' },
 ] as const;
 
 export const HERO = {
@@ -33,9 +32,9 @@ export const HERO = {
 
 /** Service figures, shown compactly in the strip under the hero. */
 export const STATS = [
-  { value: '30+', label: 'Invitados' },
-  { value: '4 h', label: 'De barra' },
-  { value: '2', label: 'Bartenders' },
+  { value: '30+', label: 'Invitados', icon: 'users' },
+  { value: '4 h', label: 'De barra', icon: 'timer' },
+  { value: '2', label: 'Bartenders', icon: 'martini' },
 ] as const;
 
 export type Drink = {

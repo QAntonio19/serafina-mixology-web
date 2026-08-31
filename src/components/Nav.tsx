@@ -1,18 +1,32 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { List, X } from '../lib/icons';
-import { BRAND, NAV } from '../lib/content';
+import { ArrowRight, List, X } from '../lib/icons';
+import { BRAND, HERO, NAV } from '../lib/content';
 import { IDS } from '../lib/images';
 import { EASE } from '../lib/motion';
-import { solidCls } from './ui';
+import { onBandCls, solidCls } from './ui';
 
 /* alt="" since the parent link already carries the accessible name via
-   aria-label — an image-only logo would otherwise announce twice. */
-const Wordmark = () => <img src={IDS.logo} alt="" className="h-14 w-auto" />;
+   aria-label — an image-only logo would otherwise announce twice. The
+   mark is drawn in ink; over the hero's photo it's forced to white
+   with brightness(0) invert(1) rather than shipping a second file. */
+const Wordmark = ({ light = false, className = '' }: { light?: boolean; className?: string }) => (
+  <img
+    src={IDS.logo}
+    alt=""
+    className={
+      'h-14 w-auto transition-[filter] duration-300 ' + (light ? 'brightness-0 invert' : '') + ' ' + className
+    }
+  />
+);
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  /* Transparent with light type while the hero's photo is still behind
+     it, then the usual paper bar once the page scrolls past it — the
+     hero is one viewport tall, so its own height is the threshold. */
+  const [overHero, setOverHero] = useState(true);
 
   useEffect(() => {
     if (!open) return;
@@ -39,7 +53,9 @@ export default function Nav() {
         setHidden(delta > 0);
       }
       lastY = y;
+      setOverHero(y < window.innerHeight - 80);
     };
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -48,7 +64,8 @@ export default function Nav() {
     <>
       <header
         className={
-          'fixed inset-x-0 top-0 z-40 bg-paper/30 backdrop-blur-md transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ' +
+          'fixed inset-x-0 top-0 z-40 transition-[transform,background-color,backdrop-filter] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ' +
+          (overHero ? 'bg-transparent' : 'bg-paper/30 backdrop-blur-md') + ' ' +
           (hidden ? '-translate-y-full' : 'translate-y-0')
         }
       >
@@ -56,8 +73,23 @@ export default function Nav() {
           aria-label="Principal"
           className="mx-auto flex h-[60px] w-full max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8"
         >
-          <a href="#top" aria-label={BRAND.full}>
-            <Wordmark />
+          <a
+            href="#top"
+            aria-label={BRAND.full}
+            className={'flex items-center gap-4 ' + (overHero ? 'text-paper' : 'text-ink')}
+          >
+            <Wordmark light={overHero} className="lg:hidden" />
+            <span className="hidden items-center gap-4 lg:flex">
+              <span>
+                <p className="brand leading-none" style={{ fontSize: '1.05rem' }}>
+                  {BRAND.name}
+                </p>
+                <p className="brand-sub mt-1 opacity-70" style={{ fontSize: '0.55rem' }}>
+                  {BRAND.sub}
+                </p>
+              </span>
+              <span aria-hidden className="h-8 w-px bg-current opacity-25" />
+            </span>
           </a>
 
           <div className="hidden items-center gap-8 lg:flex">
@@ -65,21 +97,30 @@ export default function Nav() {
               <a
                 key={item.href}
                 href={item.href}
-                className="label text-ink transition-opacity hover:opacity-60"
-                style={{ fontSize: '0.95rem', fontWeight: 700 }}
+                className={
+                  'label transition-opacity hover:opacity-60 ' +
+                  (overHero ? 'text-paper' : 'text-ink')
+                }
+                style={{ fontSize: '0.8rem' }}
               >
                 {item.label}
               </a>
             ))}
           </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:block">
+              <a href="#cotizar" className={overHero ? onBandCls : solidCls}>
+                {HERO.ctaPrimary}
+                <ArrowRight size={14} />
+              </a>
+            </div>
             <button
               type="button"
               onClick={() => setOpen(true)}
               aria-label="Abrir menú"
               aria-expanded={open}
-              className="grid h-11 w-11 place-items-center text-ink lg:hidden"
+              className={'grid h-11 w-11 place-items-center lg:hidden ' + (overHero ? 'text-paper' : 'text-ink')}
             >
               <List size={21} />
             </button>
