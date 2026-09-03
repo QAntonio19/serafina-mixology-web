@@ -88,7 +88,7 @@ function DrinkCard({ drink: d, hasNext }: { drink: Drink; hasNext: boolean }) {
             aria-expanded={open}
             className="label relative text-ink-muted underline decoration-ink/25 underline-offset-4 transition-colors duration-150 hover:text-ink hover:decoration-ink"
           >
-            {open ? 'Ocultar' : 'Ver receta'}
+            {open ? 'Ocultar' : 'Ver ingredientes'}
           </button>
         </div>
 
