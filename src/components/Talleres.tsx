@@ -1,7 +1,8 @@
 ﻿import { useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { InstagramLogo } from '../lib/icons';
 import { EASE, rise, riseParent, inView } from '../lib/motion';
-import { Display, Label, Reveal, Shell, solidCls, outlineCls } from './ui';
+import { Display, Label, Reveal, Shell, solidCls } from './ui';
 
 export default function Talleres() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -75,9 +76,14 @@ export default function Talleres() {
                   href="https://www.instagram.com/serafinamixology/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${outlineCls} h-11 px-6`}
+                  className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap px-6 text-[0.8rem] font-medium uppercase tracking-[0.06em] text-white transition-transform duration-200 hover:scale-[1.03] active:translate-y-px"
+                  style={{
+                    background:
+                      'linear-gradient(135deg, #feda75 0%, #fa7e1e 25%, #d62976 50%, #962fbf 75%, #4f5bd5 100%)',
+                  }}
                 >
-                  Ver más en Instagram ↗
+                  <InstagramLogo size={16} weight="bold" />
+                  Ver más en Instagram
                 </a>
               </motion.div>
             </Reveal>

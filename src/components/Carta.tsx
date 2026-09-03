@@ -152,10 +152,10 @@ export default function Carta() {
   const slideWidthPct = 100 / itemsPerView;
 
   return (
-    <section id="carta" className="relative overflow-hidden py-14 md:py-24">
+    <section id="carta" className="relative overflow-hidden pb-14 pt-36 md:pb-24 md:pt-52">
       <p
         aria-hidden
-        className="display pointer-events-none absolute inset-x-0 top-8 select-none whitespace-nowrap text-center text-tile-2 md:top-12"
+        className="display pointer-events-none absolute inset-x-0 top-24 select-none whitespace-nowrap text-center text-tile-2 md:top-36"
         style={{ fontSize: 'clamp(3.2rem, 15vw, 11rem)', lineHeight: 0.85 }}
       >
         Cócteles

@@ -5,7 +5,15 @@ import { BRAND, COTIZAR } from '../lib/content';
 import { EASE, rise } from '../lib/motion';
 import { Display, Label, Reveal, Shell, outlineCls, solidCls } from './ui';
 
-type Field = 'nombre' | 'correo' | 'tipo' | 'fecha' | 'invitados';
+type Field =
+  | 'nombre'
+  | 'correo'
+  | 'tipo'
+  | 'fecha'
+  | 'invitados'
+  | 'telefono'
+  | 'area'
+  | 'mensaje';
 type Errors = Partial<Record<Field, string>>;
 type Status = 'idle' | 'sending' | 'sent' | 'failed';
 
@@ -15,9 +23,21 @@ const LABEL: Record<Field, string> = {
   tipo: 'Tipo de evento',
   fecha: 'Fecha del evento',
   invitados: 'Invitados',
+  telefono: 'Teléfono',
+  area: 'Área/Ciudad',
+  mensaje: 'Cuéntenos del evento',
 };
 
-const ORDER: Field[] = ['nombre', 'correo', 'tipo', 'fecha', 'invitados'];
+const ORDER: Field[] = [
+  'nombre',
+  'correo',
+  'tipo',
+  'fecha',
+  'invitados',
+  'telefono',
+  'area',
+  'mensaje',
+];
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -28,6 +48,9 @@ function validate(d: FormData): Errors {
   const tipo = String(d.get('tipo') ?? '');
   const fecha = String(d.get('fecha') ?? '');
   const invitados = String(d.get('invitados') ?? '').trim();
+  const telefono = String(d.get('telefono') ?? '').trim();
+  const area = String(d.get('area') ?? '').trim();
+  const mensaje = String(d.get('mensaje') ?? '').trim();
 
   if (nombre.length < 2) e.nombre = 'Escriba su nombre.';
   if (!EMAIL.test(correo)) e.correo = 'Ese correo no parece válido. Revise el formato.';
@@ -36,6 +59,9 @@ function validate(d: FormData): Errors {
   else if (fecha < today()) e.fecha = 'Esa fecha ya pasó. Elija una posterior.';
   if (!invitados) e.invitados = 'Indique cuántos invitados espera.';
   else if (Number(invitados) < 1) e.invitados = 'Debe ser al menos una persona.';
+  if (telefono.replace(/\D/g, '').length < 7) e.telefono = 'Indique un teléfono de contacto.';
+  if (area.length < 2) e.area = 'Indique el área o ciudad del evento.';
+  if (mensaje.length < 5) e.mensaje = 'Cuéntenos brevemente del evento.';
 
   return e;
 }
@@ -302,7 +328,7 @@ export default function Cotizar() {
 
                     <div className="flex flex-col gap-1">
                       <label htmlFor="f-tel" className="label text-ink-faint">
-                        Teléfono <span className="normal-case">(opcional)</span>
+                        {LABEL.telefono} <Req />
                       </label>
                       <input
                         id="f-tel"
@@ -310,27 +336,60 @@ export default function Cotizar() {
                         type="tel"
                         inputMode="tel"
                         autoComplete="tel"
-                        className={fieldCls(false) + ' tnum'}
+                        required
+                        aria-required="true"
+                        aria-invalid={!!errors.telefono}
+                        aria-describedby="e-tel"
+                        onBlur={() => revalidate('telefono')}
+                        className={fieldCls(!!errors.telefono) + ' tnum'}
                       />
-                      <div className="min-h-[1.3rem]" />
+                      <FieldError id="e-tel" msg={errors.telefono} />
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <label htmlFor="f-area" className="label text-ink-faint">
+                        {LABEL.area} <Req />
+                      </label>
+                      <input
+                        id="f-area"
+                        name="area"
+                        type="text"
+                        autoComplete="address-level2"
+                        placeholder="Tijuana"
+                        required
+                        aria-required="true"
+                        aria-invalid={!!errors.area}
+                        aria-describedby="e-area"
+                        onBlur={() => revalidate('area')}
+                        className={fieldCls(!!errors.area)}
+                      />
+                      <FieldError id="e-area" msg={errors.area} />
                     </div>
                   </div>
 
                   <div className="mt-4 flex flex-col gap-1">
                     <label htmlFor="f-mensaje" className="label text-ink-faint">
-                      Cuéntenos del evento <span className="normal-case">(opcional)</span>
+                      {LABEL.mensaje} <Req />
                     </label>
                     <textarea
                       id="f-mensaje"
                       name="mensaje"
                       rows={3}
-                      aria-describedby="h-mensaje"
-                      className="w-full resize-y border-b border-line bg-transparent py-3 text-[0.95rem] leading-relaxed text-ink outline-none transition-colors focus:border-ink"
+                      required
+                      aria-required="true"
+                      aria-invalid={!!errors.mensaje}
+                      aria-describedby="h-mensaje e-mensaje"
+                      onBlur={() => revalidate('mensaje')}
+                      className={
+                        'w-full resize-y border-b bg-transparent py-3 text-[0.95rem] leading-relaxed text-ink outline-none transition-colors focus:border-ink ' +
+                        (errors.mensaje ? 'border-danger' : 'border-line')
+                      }
                     />
                     <p id="h-mensaje" className="mt-2 text-[0.78rem] text-ink-muted">
                       Sede, horario, si hay banquete, y cualquier trago que quiera en la
                       carta.
                     </p>
+                    <FieldError id="e-mensaje" msg={errors.mensaje} />
                   </div>
 
                   {status === 'failed' && (

@@ -6,9 +6,9 @@ export const BRAND = {
   full: 'Serafina Mixology',
   tagline: 'Coctelería para eventos',
   coverage: 'Tijuana y Valle de Guadalupe',
-  phone: '+52 664 218 5390',
-  phoneHref: '+526642185390',
-  whatsapp: 'https://wa.me/526642185390',
+  phone: '+1 619 907 5065',
+  phoneHref: '+16199075065',
+  whatsapp: 'https://wa.me/16199075065',
   email: 'hola@serafinamixology.mx',
   instagram: 'https://instagram.com/serafinamixology',
 } as const;
@@ -23,19 +23,12 @@ export const NAV = [
 export const HERO = {
   eyebrow: 'Coctelería para eventos',
   word: 'Barra',
-  headA: 'Usted pone la fiesta.',
-  headB: 'Nosotros la barra.',
+  headA: 'Cócteles extraordinarios',
+  headB: 'eventos extraordinarios.',
   sub: 'Llevamos la barra móvil, los bartenders y una carta de autor a su boda, evento corporativo o fiesta privada.',
   ctaPrimary: 'Cotizar mi evento',
-  ctaSecondary: 'Ver la carta',
+  ctaSecondary: 'Ver paquetes',
 } as const;
-
-/** Service figures, shown compactly in the strip under the hero. */
-export const STATS = [
-  { value: '30+', label: 'Invitados', icon: 'users' },
-  { value: '4 h', label: 'De barra', icon: 'timer' },
-  { value: '2', label: 'Bartenders', icon: 'martini' },
-] as const;
 
 export type Drink = {
   name: string;
@@ -125,7 +118,21 @@ export const DRINKS: Drink[] = [
 export const CARTA = {
   label: 'La carta',
   head: 'Nueve de autor, y la que usted quiera',
-  note: 'La armamos con ustedes en una cata previa.',
+  note: 'Cada opción puede adaptarse a sus necesidades.',
+} as const;
+
+/** Four packages, real inclusions and price per person still pending
+ *  from the business — every field below is a marked placeholder. */
+export const PAQUETES = {
+  label: 'Paquetes',
+  head: 'Elija el paquete para su evento',
+  note: 'Cuatro opciones con lo que incluye cada una y el precio por persona.',
+  items: [
+    { name: 'Paquete 1', includes: 'Pendiente de definir', price: 'Pendiente' },
+    { name: 'Paquete 2', includes: 'Pendiente de definir', price: 'Pendiente' },
+    { name: 'Paquete 3', includes: 'Pendiente de definir', price: 'Pendiente' },
+    { name: 'Paquete 4', includes: 'Pendiente de definir', price: 'Pendiente' },
+  ],
 } as const;
 
 export const RAZONES = {
@@ -141,7 +148,7 @@ export const RAZONES = {
     {
       icon: 'menu' as const,
       title: 'Carta a la medida',
-      body: 'Una cata previa para ajustar los tragos a su gusto. Siempre van dos opciones sin alcohol.',
+      body: 'Cada opción puede adaptarse a sus necesidades. Siempre van dos opciones sin alcohol.',
       image: IDS.cartaAutor,
       alt: 'Selección de cocteles de autor de Serafina Mixology alineados en la barra',
     },
@@ -178,13 +185,6 @@ export type EventKind = {
 
 export const EVENTOS: EventKind[] = [
   {
-    label: 'Bodas',
-    name: 'De la recepción al último baile',
-    body: 'Coctel de bienvenida, barra durante la cena y una carta firmada por los novios. Coordinamos con su planner y con el banquete.',
-    image: IDS.bodas,
-    alt: 'Mesa larga de banquete al aire libre con candil, flores y cristalería',
-  },
-  {
     label: 'Corporativos',
     name: 'Lanzamientos, cenas y fin de año',
     body: 'Facturamos, cumplimos protocolos de sede y llegamos con montaje discreto. Cotización en menos de dos días.',
@@ -197,6 +197,13 @@ export const EVENTOS: EventKind[] = [
     body: 'Desde treinta invitados. Nos adaptamos al espacio que tenga, y si no hay agua llevamos garrafones.',
     image: IDS.privadas,
     alt: 'Bartender colando un coctel sobre hielo en la barra',
+  },
+  {
+    label: 'Bodas',
+    name: 'De la recepción al último baile',
+    body: 'Coctel de bienvenida, barra durante la cena y una carta firmada por los novios. Coordinamos con su planner y con el banquete.',
+    image: IDS.bodas,
+    alt: 'Mesa larga de banquete al aire libre con candil, flores y cristalería',
   },
 ];
 
@@ -219,10 +226,10 @@ export const RESENAS = {
     },
     {
       quote:
-        'Hicieron la coctelería para nuestro evento binacional en San Diego. El trago de jamaica y chile con mezcal artesanal fue la sensación.',
+        'Hicieron la coctelería para nuestro evento frente al mar en Rosarito. El trago de jamaica y chile con mezcal artesanal fue la sensación.',
       name: 'Carlos & Jennifer Wright',
-      meta: 'Evento privado, Coronado, San Diego',
-      city: 'San Diego',
+      meta: 'Evento privado, Rosarito',
+      city: 'Rosarito',
       image: IDS.resena2,
       alt: 'Bartender de Serafina sirviendo en la barra durante un evento',
       focus: 'center 35%',
@@ -233,9 +240,9 @@ export const RESENAS = {
       name: 'Bruno Cattáneo',
       meta: 'Cena corporativa, Zona Río, Tijuana',
       city: 'Tijuana',
-      image: IDS.resena3,
-      alt: 'Invitada brindando con un coctel de Serafina bajo una sombrilla',
-      focus: 'center 30%',
+      image: IDS.resena2,
+      alt: 'Bartender de Serafina sirviendo en la barra durante un evento',
+      focus: 'center 35%',
     },
     {
       quote:
@@ -243,19 +250,19 @@ export const RESENAS = {
       name: 'Mariana & David S.',
       meta: 'Boda boutique, Valle de Guadalupe',
       city: 'Valle de Guadalupe',
-      image: IDS.resena4,
-      alt: 'Invitada con un coctel de café de autor de Serafina',
-      focus: 'center 15%',
+      image: IDS.resena1,
+      alt: 'Invitados brindando con cocteles de Serafina en un evento al aire libre',
+      focus: 'center 40%',
     },
     {
       quote:
-        'Puntualidad absoluta, presentación impecable y una carta que compite con los mejores speakeasies de California.',
+        'Puntualidad absoluta, presentación impecable y una carta que compite con los mejores bares de la región.',
       name: 'Sophia Henderson',
-      meta: 'Celebración privada, La Jolla, San Diego',
-      city: 'San Diego',
-      image: IDS.resena5,
-      alt: 'Dos invitadas brindando con cocteles de Serafina',
-      focus: 'center',
+      meta: 'Celebración privada, Ensenada',
+      city: 'Ensenada',
+      image: IDS.resena2,
+      alt: 'Bartender de Serafina sirviendo en la barra durante un evento',
+      focus: 'center 35%',
     },
     {
       quote:
@@ -279,13 +286,13 @@ export const RESENAS = {
     },
     {
       quote:
-        'Cruzaron la frontera con todo el equipo y llegaron antes que el catering. La barra fue de lo que más habló la gente esa noche.',
+        'Llegaron con todo el equipo antes que el catering, sin un solo tropiezo. La barra fue de lo que más habló la gente esa noche.',
       name: 'Andrew Salas',
-      meta: 'Boda en Point Loma, San Diego',
-      city: 'San Diego',
-      image: IDS.resena3,
-      alt: 'Invitada brindando con un coctel de Serafina bajo una sombrilla',
-      focus: 'center 30%',
+      meta: 'Boda en Valle de Guadalupe',
+      city: 'Valle de Guadalupe',
+      image: IDS.resena1,
+      alt: 'Invitados brindando con cocteles de Serafina en un evento al aire libre',
+      focus: 'center 40%',
     },
     {
       quote:
@@ -293,9 +300,9 @@ export const RESENAS = {
       name: 'Paulina Restrepo',
       meta: 'Taller para equipo, Zona Río, Tijuana',
       city: 'Tijuana',
-      image: IDS.resena4,
-      alt: 'Invitada con un coctel de café de autor de Serafina',
-      focus: 'center 15%',
+      image: IDS.resena2,
+      alt: 'Bartender de Serafina sirviendo en la barra durante un evento',
+      focus: 'center 35%',
     },
   ],
 } as const;
@@ -306,9 +313,9 @@ export const COBERTURA = {
   body: 'Cubrimos Tijuana, Rosarito, Ensenada y todo el Valle de Guadalupe sin costo de traslado. Fuera de esa zona se cotiza aparte, y sí, viajamos.',
   cta: 'Escríbanos su zona por WhatsApp',
   zonas: [
-    { city: 'San Diego', note: 'Eventos cruzando la frontera' },
     { city: 'Tijuana', note: 'Base de operaciones' },
     { city: 'Valle de Guadalupe', note: 'Bodas y viñedos' },
+    { city: 'Rosarito y Ensenada', note: 'Sin costo de traslado' },
   ],
 } as const;
 
@@ -316,7 +323,7 @@ export const COTIZAR = {
   label: 'Cotización',
   head: 'Cuéntenos del evento',
   note: 'Respondemos en menos de dos días hábiles con una propuesta y un precio por persona.',
-  tipos: ['Boda', 'Corporativo', 'Fiesta privada', 'Otro'],
+  tipos: ['Corporativo', 'Fiesta privada', 'Boda', 'Otro'],
 } as const;
 
 export const FOOTER = [
@@ -331,10 +338,10 @@ export const FOOTER = [
   {
     head: 'Eventos',
     links: [
-      { label: 'Bodas', href: '#eventos' },
       { label: 'Corporativos', href: '#eventos' },
-      { label: 'Talleres', href: '#talleres' },
       { label: 'Fiestas privadas', href: '#eventos' },
+      { label: 'Bodas', href: '#eventos' },
+      { label: 'Talleres', href: '#talleres' },
     ],
   },
   {

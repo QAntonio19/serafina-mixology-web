@@ -122,7 +122,7 @@ Crítico: **122 kB gzip**, un solo bundle. La imagen del hero se precarga con el
    (marcado con `TODO` en `Cotizar.tsx`).
 2. **Datos del negocio inventados.** Teléfono, correo, las seis recetas y **las nueve
    reseñas con sus cinco estrellas** son de relleno. Viven en `src/lib/content.ts`.
-   Las reseñas están escritas para Tijuana, San Diego y Valle de Guadalupe, pero
+   Las reseñas están escritas para Tijuana, Rosarito, Ensenada y Valle de Guadalupe, pero
    **son ficticias**: hay que reemplazarlas por testimonios reales antes de publicar.
    La cobertura y la ubicación sí son las reales, tomadas del perfil de Instagram.
 3. ~~**Fotos propias.**~~ Hecho: cada foto del sitio es un archivo real en

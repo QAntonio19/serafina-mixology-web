@@ -84,7 +84,7 @@ export default function Cobertura() {
           <motion.div variants={rise} className="md:col-span-8">
             <img
               src={photo(IDS.coberturaMapa, 1200, 2 / 3)}
-              alt="Mapa de la cobertura de Serafina: San Diego, Tijuana y Valle de Guadalupe"
+              alt="Mapa de la cobertura de Serafina: Tijuana y Valle de Guadalupe"
               loading="lazy"
               decoding="async"
               className="block w-full h-auto"

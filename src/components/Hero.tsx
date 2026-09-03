@@ -1,7 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react';
-import { HERO, STATS } from '../lib/content';
+import { HERO } from '../lib/content';
 import { IDS, photo, srcSet } from '../lib/images';
-import { Martini, Timer, Users } from '../lib/icons';
 import { EASE } from '../lib/motion';
 import { Shell } from './ui';
 
@@ -9,8 +8,6 @@ import { Shell } from './ui';
    dark — the site has no standing accent token (the drinks carry the
    colour everywhere else), so this one hex is scoped to this hero. */
 const GOLD = '#C9A46B';
-
-const STAT_ICONS = { users: Users, timer: Timer, martini: Martini } as const;
 
 /**
  * A full-bleed night shot behind the pitch: the word, the tagline, the
@@ -54,7 +51,7 @@ export default function Hero() {
         }}
       />
 
-      <Shell className="relative flex flex-1 flex-col justify-center pt-28">
+      <Shell className="relative flex flex-1 flex-col justify-center pb-16 pt-28">
         <motion.p {...rise(0)} className="label" style={{ color: GOLD }}>
           {HERO.eyebrow}
         </motion.p>
@@ -68,7 +65,7 @@ export default function Hero() {
 
         <motion.p
           {...rise(0.22)}
-          className="display mt-6 max-w-[26ch] text-[clamp(1.3rem,2.6vw,2rem)] leading-[1.16]"
+          className="display mt-6 max-w-[34ch] text-[clamp(1.3rem,2.6vw,2rem)] leading-[1.16]"
           style={{ color: GOLD }}
         >
           {HERO.headA}
@@ -89,29 +86,12 @@ export default function Hero() {
             {HERO.ctaPrimary}
           </a>
           <a
-            href="#carta"
+            href="#paquetes"
             className="inline-flex h-11 items-center justify-center gap-2 whitespace-nowrap border border-paper/35 px-6 text-[0.8rem] font-medium uppercase tracking-[0.06em] text-paper transition-all duration-200 hover:border-paper hover:bg-paper hover:text-ink active:translate-y-px"
           >
             {HERO.ctaSecondary}
           </a>
         </motion.div>
-      </Shell>
-
-      <Shell className="relative pb-10 pt-8 sm:pb-12">
-        <motion.dl {...rise(0.55)} className="flex flex-wrap items-center gap-x-10 gap-y-4">
-          {STATS.map((s) => {
-            const Icon = STAT_ICONS[s.icon];
-            return (
-              <div key={s.label} className="flex items-center gap-3">
-                <Icon size={20} className="text-paper/60" />
-                <div>
-                  <dd className="tnum text-[1.05rem] font-semibold leading-none text-paper">{s.value}</dd>
-                  <dt className="label mt-1 text-paper/60">{s.label}</dt>
-                </div>
-              </div>
-            );
-          })}
-        </motion.dl>
       </Shell>
     </header>
   );

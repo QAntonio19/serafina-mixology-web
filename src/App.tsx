@@ -6,6 +6,7 @@ import Eventos from './components/Eventos';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
 import Nav from './components/Nav';
+import Paquetes from './components/Paquetes';
 import Resenas from './components/Resenas';
 import Servicio from './components/Servicio';
 import Talleres from './components/Talleres';
@@ -26,6 +27,7 @@ export default function App() {
 
       <main id="contenido">
         <Carta />
+        <Paquetes />
         <Servicio />
         <Band />
         <Eventos />
