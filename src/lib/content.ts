@@ -163,7 +163,7 @@ export const RAZONES = {
 } as const;
 
 export const STATEMENT = {
-  head: 'Estamos aquí por la fiesta, la compañía y la conversación',
+  head: 'Estamos aquí por la fiesta, la compañía y la conversación',
   /** Label matches where it goes: the events section, not a process page. */
   cta: 'Ver los eventos',
 } as const;

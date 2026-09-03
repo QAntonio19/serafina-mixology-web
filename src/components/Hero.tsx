@@ -73,7 +73,7 @@ export default function Hero() {
           {HERO.headB}
         </motion.p>
 
-        <motion.p {...rise(0.32)} className="mt-6 max-w-[34ch] text-[0.9rem] leading-relaxed text-paper/70">
+        <motion.p {...rise(0.32)} className="mt-6 max-w-[48ch] text-[0.9rem] leading-relaxed text-paper/70">
           {HERO.sub}
         </motion.p>
 

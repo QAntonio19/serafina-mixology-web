@@ -20,7 +20,10 @@ export default function Paquetes() {
           <motion.div variants={rise}>
             <Display className="max-w-[20ch] text-ink">{PAQUETES.head}</Display>
           </motion.div>
-          <motion.p variants={rise} className="max-w-[36ch] text-[0.85rem] leading-relaxed text-ink-muted">
+          <motion.p
+            variants={rise}
+            className="max-w-[30ch] text-[0.85rem] leading-relaxed text-ink-muted sm:max-w-none sm:whitespace-nowrap"
+          >
             {PAQUETES.note}
           </motion.p>
         </Reveal>

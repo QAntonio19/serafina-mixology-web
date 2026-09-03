@@ -171,7 +171,7 @@ export default function Carta() {
           </motion.div>
           <motion.p
             variants={rise}
-            className="max-w-[36ch] text-[0.85rem] leading-relaxed text-ink-muted"
+            className="max-w-none whitespace-nowrap text-[0.85rem] leading-relaxed text-ink-muted"
           >
             {CARTA.note}
           </motion.p>
