@@ -240,9 +240,9 @@ export const RESENAS = {
       name: 'Bruno Cattáneo',
       meta: 'Cena corporativa, Zona Río, Tijuana',
       city: 'Tijuana',
-      image: IDS.resena2,
-      alt: 'Bartender de Serafina sirviendo en la barra durante un evento',
-      focus: 'center 35%',
+      image: IDS.resena6,
+      alt: 'Pareja de invitados brindando con cocteles de Serafina en un jardín',
+      focus: 'center 30%',
     },
     {
       quote:
@@ -250,9 +250,9 @@ export const RESENAS = {
       name: 'Mariana & David S.',
       meta: 'Boda boutique, Valle de Guadalupe',
       city: 'Valle de Guadalupe',
-      image: IDS.resena1,
-      alt: 'Invitados brindando con cocteles de Serafina en un evento al aire libre',
-      focus: 'center 40%',
+      image: IDS.resena7,
+      alt: 'Invitados brindando con cocteles de Serafina en una recepción nocturna',
+      focus: 'center 25%',
     },
     {
       quote:
@@ -260,9 +260,9 @@ export const RESENAS = {
       name: 'Sophia Henderson',
       meta: 'Celebración privada, Ensenada',
       city: 'Ensenada',
-      image: IDS.resena2,
-      alt: 'Bartender de Serafina sirviendo en la barra durante un evento',
-      focus: 'center 35%',
+      image: IDS.resena8,
+      alt: 'Novios brindando con cocteles de Serafina el día de su boda',
+      focus: 'center 20%',
     },
     {
       quote:
@@ -270,9 +270,9 @@ export const RESENAS = {
       name: 'Lucía Arismendi',
       meta: 'Fiesta privada, La Cacho, Tijuana',
       city: 'Tijuana',
-      image: IDS.resena1,
-      alt: 'Invitados brindando con cocteles de Serafina en un evento al aire libre',
-      focus: 'center 40%',
+      image: IDS.resena9,
+      alt: 'Pareja brindando con cocteles de Serafina en una fiesta',
+      focus: 'center 30%',
     },
     {
       quote:
@@ -280,9 +280,9 @@ export const RESENAS = {
       name: 'Renata Ocampo',
       meta: 'Cena de vendimia, Valle de Guadalupe',
       city: 'Valle de Guadalupe',
-      image: IDS.resena2,
-      alt: 'Bartender de Serafina sirviendo en la barra durante un evento',
-      focus: 'center 35%',
+      image: IDS.resena10,
+      alt: 'Invitadas riendo con cocteles de Serafina en la barra',
+      focus: 'center 25%',
     },
     {
       quote:
@@ -290,9 +290,9 @@ export const RESENAS = {
       name: 'Andrew Salas',
       meta: 'Boda en Valle de Guadalupe',
       city: 'Valle de Guadalupe',
-      image: IDS.resena1,
-      alt: 'Invitados brindando con cocteles de Serafina en un evento al aire libre',
-      focus: 'center 40%',
+      image: IDS.resena11,
+      alt: 'Invitada sonriendo con un coctel de Serafina',
+      focus: 'center 25%',
     },
     {
       quote:
@@ -300,9 +300,9 @@ export const RESENAS = {
       name: 'Paulina Restrepo',
       meta: 'Taller para equipo, Zona Río, Tijuana',
       city: 'Tijuana',
-      image: IDS.resena2,
-      alt: 'Bartender de Serafina sirviendo en la barra durante un evento',
-      focus: 'center 35%',
+      image: IDS.resena1,
+      alt: 'Invitados brindando con cocteles de Serafina en un evento al aire libre',
+      focus: 'center 40%',
     },
   ],
 } as const;

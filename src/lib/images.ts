@@ -62,6 +62,12 @@ export const IDS = {
   /* Guests at real events, one per review in the rotator. */
   resena1: '/fotos/resena-1.jpg',
   resena2: '/fotos/resena-2.jpg',
+  resena6: '/fotos/resena-6.png',
+  resena7: '/fotos/resena-7.png',
+  resena8: '/fotos/resena-8.png',
+  resena9: '/fotos/resena-9.png',
+  resena10: '/fotos/resena-10.png',
+  resena11: '/fotos/resena-11.png',
 
   /* Events and moments, also real. */
   bodas: '/fotos/evento-bodas.jpg',
